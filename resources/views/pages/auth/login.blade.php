@@ -21,6 +21,12 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        @if (session('status'))
+                            <div class="alert alert-success py-2" role="alert" style="font-size: 0.85rem;">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
                         @if ($errors->has('email'))
                             <div class="alert alert-danger py-2" role="alert" style="font-size: 0.85rem;">
                                 {{ $errors->first('email') }}

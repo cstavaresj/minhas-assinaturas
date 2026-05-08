@@ -45,7 +45,7 @@
                     <p>Reservamos o direito de modificar, suspender ou descontinuar o serviço a qualquer momento, com ou sem aviso prévio, visando melhorias técnicas ou de segurança.</p>
 
                     <h2 class="h4 mt-5 mb-3 text-primary-custom">6. Contato</h2>
-                    <p>Se você tiver dúvidas sobre estes Termos, entre em contato através do site <a href="https://tavaresj.com.br" class="text-primary-custom text-decoration-none">tavaresj.com.br</a>.</p>
+                    <p>Se você tiver dúvidas sobre estes Termos, entre em contato através do site <a href="https://carlossoares.dev" class="text-primary-custom text-decoration-none">carlossoares.dev</a>.</p>
 
                     <div class="mt-5 text-center">
                         <a href="/" class="btn btn-primary px-5 py-2 fw-bold" style="border-radius: 50px;">Voltar para o Início</a>
@@ -56,3 +56,4 @@
     </div>
 </body>
 </html>
+

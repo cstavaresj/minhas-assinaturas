@@ -21,7 +21,7 @@ class ManageCategories extends Component
     public $deletingName = '';
 
     protected $rules = [
-        'name' => 'required|min:3|max:255|unique:categories,name',
+        'name' => 'required|min:3|max:80|unique:categories,name',
         'icon' => 'required',
         'color' => 'required',
     ];
@@ -76,7 +76,7 @@ class ManageCategories extends Component
     {
         $rules = $this->rules;
         if ($this->isEditing) {
-            $rules['name'] = 'required|min:3|max:255|unique:categories,name,' . $this->categoryId;
+            $rules['name'] = 'required|min:3|max:80|unique:categories,name,' . $this->categoryId;
         }
 
         $this->validate($rules);

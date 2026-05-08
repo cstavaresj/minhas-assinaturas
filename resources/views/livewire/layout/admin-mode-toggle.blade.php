@@ -20,7 +20,7 @@ new class extends Component {
 }; ?>
 
 <a href="{{ url('admin-mode/toggle') }}" 
-   style="display: block; text-decoration: none; cursor: pointer; position: relative; z-index: 9999;" 
+   style="display: block; text-decoration: none; cursor: pointer; position: relative; z-index: 10;" 
    onclick="console.log('Botão clicado!');">
     <div class="form-check form-switch d-flex align-items-center gap-2 bg-dark bg-opacity-50 px-3 py-1 border border-secondary rounded-pill shadow-sm" style="pointer-events: none;">
         <input class="form-check-input ms-0" type="checkbox" role="switch" id="adminModeSwitch" style="width: 2.2em; height: 1.1em;" {{ $adminMode ? 'checked' : '' }}>
@@ -29,3 +29,4 @@ new class extends Component {
         </label>
     </div>
 </a>
+

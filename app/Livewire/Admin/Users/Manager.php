@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
+use App\Services\PasswordSecurityService;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -139,6 +140,9 @@ class Manager extends Component
 
             if (blank($data['password'])) {
                 unset($data['password']);
+            } else {
+                $data['password'] = PasswordSecurityService::hashPassword((string) $data['password']);
+                $data['created_via_google'] = false;
             }
 
             // Admin não pode alterar seu próprio status ou role
@@ -151,6 +155,8 @@ class Manager extends Component
         } else {
             unset($data['password_confirmation']);
             $data['lgpd_consent_at'] = now();
+            $data['password'] = PasswordSecurityService::hashPassword((string) $data['password']);
+            $data['created_via_google'] = false;
             $user = User::create($data);
         }
 

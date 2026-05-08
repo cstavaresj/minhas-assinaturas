@@ -405,7 +405,7 @@ class Index extends Component
     protected function rules(): array
     {
         $rules = [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:80',
             'billing_cycle' => 'required|in:monthly,yearly,quarterly,semiannual,custom',
             'amount' => 'required|numeric|min:0|max:99999999',
             'currency' => 'required|string|size:3',
@@ -423,7 +423,7 @@ class Index extends Component
             'cancelled_at' => 'nullable|date',
             'auto_renew' => 'boolean',
             'is_domain' => 'boolean',
-            'notes' => 'nullable|string|max:1000',
+            'notes' => 'nullable|string|max:255',
             'service_url' => 'nullable|url|max:255',
         ];
 
@@ -764,9 +764,9 @@ class Index extends Component
 
         return view('livewire.subscriptions.index', [
             'subscriptions' => $subscriptions,
-            'categories' => Category::where(function ($q) use ($token) {
-                $q->where('privacy_token', $token)->orWhere('is_system', true);
-            })->get(),
+            'categories' => Category::where('is_system', true)
+                ->orderBy('name')
+                ->get(),
             'totalPages' => ceil($total / $this->perPage),
             'totalRecords' => $total,
         ]);

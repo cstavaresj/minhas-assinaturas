@@ -57,7 +57,7 @@ class SubscriptionImportService
         $subscription = Subscription::create([
             'privacy_token' => $privacyToken,
             'category_id' => $categoryId,
-            'name' => mb_substr($name, 0, 255),
+            'name' => mb_substr($name, 0, 80),
             'service_url' => $this->sanitizeUrl($this->getValue($row, $indices['url'])),
             'amount' => $amount,
             'currency' => $this->parseCurrency($this->getValue($row, $indices['currency'], 'BRL')),
@@ -69,7 +69,7 @@ class SubscriptionImportService
             'status' => $status,
             'cancelled_at' => $status === 'cancelled' ? $nextDate : null,
             'auto_renew' => $autoRenew,
-            'notes' => $this->sanitizeText($this->getValue($row, $indices['notes'])),
+            'notes' => mb_substr((string) ($this->sanitizeText($this->getValue($row, $indices['notes'])) ?? ''), 0, 255) ?: null,
         ]);
 
         return ['status' => 'imported', 'id' => $subscription->id, 'name' => $name];

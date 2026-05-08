@@ -1,8 +1,8 @@
 <?php
 
 use App\Concerns\PasswordValidationRules;
-use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 new class extends Component {
@@ -24,7 +24,7 @@ new class extends Component {
         $this->password = '';
     }
 
-    public function deleteUser(Logout $logout): void
+    public function deleteUser(): void
     {
         $this->validate([
             'password' => $this->currentPasswordRules(),
@@ -35,11 +35,14 @@ new class extends Component {
             return;
         }
 
-        tap(Auth::user(), function ($user) use ($logout) {
-            $logout($user);
-            $user->update(['status' => 'inactive']);
-            $user->delete();
-        });
+        $user = Auth::user();
+        $user->update(['status' => 'inactive']);
+        $user->delete();
+
+        Auth::guard('web')->logout();
+        Session::invalidate();
+        Session::regenerateToken();
+        session()->flash('status', 'Conta excluida com sucesso.');
 
         $this->redirect('/', navigate: true);
     }

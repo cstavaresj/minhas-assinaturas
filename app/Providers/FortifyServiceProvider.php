@@ -112,6 +112,13 @@ class FortifyServiceProvider extends ServiceProvider
             $email = Str::lower((string) $request->input(Fortify::username()));
             $ip = $request->ip();
             $throttleKey = Str::transliterate($email.'|'.$ip);
+            $userIncludingTrashed = User::withTrashed()->where('email', $email)->first();
+
+            // Usuario desativado (soft delete) deve sempre receber erro generico de credenciais,
+            // sem feedback de bloqueio por tentativas.
+            if ($userIncludingTrashed?->trashed()) {
+                return Limit::none();
+            }
 
             return Limit::perMinutes(60, 5)->by($throttleKey)->response(function (Request $request, $limit) use ($throttleKey) {
                 event(new Lockout($request));

@@ -92,11 +92,11 @@ class T18_GerenciarCategoriasTeste extends TestCase
     }
 
     /**
-     * Criar categoria com nome oversized (>255) falha
+     * Criar categoria com nome oversized (>80) falha
      */
     public function test_076_criar_categoria_com_nome_muito_longo()
     {
-        $longName = str_repeat('a', 256);
+        $longName = str_repeat('a', 81);
 
         Livewire::actingAs($this->admin)
             ->test('admin.manage-categories')

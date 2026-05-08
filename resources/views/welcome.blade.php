@@ -237,6 +237,13 @@
     </style>
 </head>
 <body>
+    @if (session('status'))
+        <div class="container pt-3">
+            <div class="alert alert-success mb-0" role="alert">
+                {{ session('status') }}
+            </div>
+        </div>
+    @endif
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent pt-4">
@@ -503,8 +510,8 @@
                 <span class="text-secondary opacity-25">|</span>
                 <a href="{{ route('privacy') }}" class="text-secondary text-decoration-none small mx-2 opacity-75 hover-opacity-100">Privacidade</a>
             </div>
-            <a href="https://tavaresj.com.br" target="_blank" class="d-inline-block mt-2" style="color: #4b5563; text-decoration: none; font-size: 0.7rem; letter-spacing: 0.5px; transition: color 0.3s;" onmouseover="this.style.color='#94a3b8'" onmouseout="this.style.color='#4b5563'">
-                tavaresj.com.br
+            <a href="https://carlossoares.dev" target="_blank" class="d-inline-block mt-2" style="color: #4b5563; text-decoration: none; font-size: 0.7rem; letter-spacing: 0.5px; transition: color 0.3s;" onmouseover="this.style.color='#94a3b8'" onmouseout="this.style.color='#4b5563'">
+                carlossoares.dev
             </a>
         </div>
     </footer>
@@ -615,3 +622,4 @@
     {{-- @livewireScripts removido: inject_assets=true já injeta automaticamente --}}
 </body>
 </html>
+

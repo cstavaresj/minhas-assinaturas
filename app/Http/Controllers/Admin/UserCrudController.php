@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use App\Services\PasswordSecurityService;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -63,6 +64,8 @@ class UserCrudController extends CrudController
 
         $data = $this->crud->getStrippedSaveRequest($request);
         $data['lgpd_consent_at'] = now();
+        $data['password'] = PasswordSecurityService::hashPassword((string) $data['password']);
+        $data['created_via_google'] = false;
 
         $item = $this->crud->create($data);
         $this->syncRole($item, (string) $request->input('role', 'user'));
@@ -87,6 +90,9 @@ class UserCrudController extends CrudController
 
         if (blank($request->input('password'))) {
             unset($data['password']);
+        } else {
+            $data['password'] = PasswordSecurityService::hashPassword((string) $data['password']);
+            $data['created_via_google'] = false;
         }
 
         $item = $this->crud->update(
