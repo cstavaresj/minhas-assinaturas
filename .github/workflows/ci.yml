@@ -47,6 +47,9 @@ jobs:
         run: |
           cp .env.example .env
           php artisan key:generate
+          echo "APP_LOCALE=pt_BR" >> .env
+          echo "APP_FALLBACK_LOCALE=pt_BR" >> .env
+          echo "APP_TIMEZONE=America/Sao_Paulo" >> .env
 
       - name: Clear config cache
         run: php artisan config:clear --ansi
